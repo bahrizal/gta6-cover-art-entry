@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice City Cover Studio — GTA 6-style cover art maker</title>
+<meta name="description" content="Turn any photo and caption into GTA 6-style multi-panel cover art, offline in your browser, exported as a PNG.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="editor">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">VC</span>
+      <div>
+        <h1>Vice City Cover Studio</h1>
+        <p>Your photo + a caption = poster-ready cover art. 100% offline — photos never leave this machine.</p>
+      </div>
+    </div>
+    <button id="exportBtn" class="export-btn" type="button">Export PNG ↓</button>
+  </header>
+
+  <main class="workspace">
+    <section class="stage" id="dropZone">
+      <canvas id="previewCanvas" width="980" height="551"></canvas>
+      <p class="stage-hint">Click a panel to select it · drag to move the photo · scroll to zoom · double-check the title below</p>
+      <p id="exportStatus" class="status" role="status"></p>
+    </section>
+
+    <aside class="controls">
+      <section class="panel-card">
+        <h2>1 · Photos</h2>
+        <div class="button-row">
+          <button id="addPhotosBtn" class="btn" type="button">Add your photos</button>
+          <button id="loadSamplesBtn" class="btn ghost" type="button">Load samples</button>
+        </div>
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        <div id="photoTray" class="tray" aria-label="Your photos"></div>
+        <p class="fineprint">Click a photo to put it in the selected panel. Drag &amp; drop image files anywhere on the preview.</p>
+        <div class="button-row">
+          <button id="fillAllBtn" class="btn ghost" type="button">Fill every panel with this photo</button>
+          <button id="nextPhotoBtn" class="btn ghost" type="button">Next photo →</button>
+        </div>
+      </section>
+
+      <section class="panel-card">
+        <h2>2 · Layout &amp; grade</h2>
+        <label class="field-label" for="layoutRow">Layout</label>
+        <div id="layoutRow" class="chips"></div>
+        <label class="field-label" for="gradeRow">Colour grade</label>
+        <div id="gradeRow" class="chips"></div>
+        <label class="field-label" for="sizeRow">Export size</label>
+        <div id="sizeRow" class="chips"></div>
+      </section>
+
+      <section class="panel-card">
+        <h2>3 · Selected panel</h2>
+        <p id="panelLabel" class="panel-label">Panel 1 of 4 · Hero Grid</p>
+        <label class="field-label" for="zoomRange">Zoom</label>
+        <input id="zoomRange" type="range" min="0" max="100" value="39">
+      </section>
+
+      <section class="panel-card">
+        <h2>4 · Lettering</h2>
+        <label class="field-label" for="titleInput">Title</label>
+        <input id="titleInput" class="text-input" type="text" value="NEON SHORE" maxlength="24">
+        <label class="field-label" for="subtitleInput">Script subtitle</label>
+        <input id="subtitleInput" class="text-input" type="text" value="a vice city story" maxlength="48">
+        <label class="field-label" for="badgeInput">Badge</label>
+        <input id="badgeInput" class="text-input" type="text" value="VICE CITY · 2026" maxlength="24">
+        <label class="field-label" for="titleStyleRow">Title fill</label>
+        <div id="titleStyleRow" class="chips"></div>
+        <label class="field-label" for="heatRow">Heat meter</label>
+        <div id="heatRow" class="chips"></div>
+      </section>
+
+      <section class="panel-card">
+        <h2>5 · Finish</h2>
+        <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+        <label class="check"><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+        <label class="check"><input id="halftoneToggle" type="checkbox" checked> Halftone print texture</label>
+        <label class="check"><input id="inkToggle" type="checkbox" checked> White panel gutters</label>
+        <p class="fineprint">Original art and lettering — no Rockstar Games logo, artwork or fonts. Fonts: Noto Sans Condensed &amp; Pacifico, SIL Open Font License (see app/fonts/OFL.txt).</p>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>Made for make.fun's “Make GTA 6 Cover Art” bounty.</span>
+    <span>Tip: <kbd>?shot=cover</kbd> renders a full cover, <kbd>?shot=editor</kbd> opens this editor.</span>
+  </footer>
+</div>
+
+<div id="coverStage" hidden>
+  <canvas id="coverCanvas"></canvas>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
